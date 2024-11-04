@@ -1,8 +1,8 @@
 const router = require('express')();
 const bodyParser = require('body-parser');
-const clientRouter = require('../routes/clients-route')
-const employeerRouter = require('../routes/employeer-router')
-const productRouter = require('../routes/products-route')
+const clientRouter = require('./files/clients-route')
+const employeerRouter = require('./files/employeer-router')
+const productRouter = require('./files/products-route')
 
 router.use(bodyParser.json());
 router.get('/', (req, res) => {

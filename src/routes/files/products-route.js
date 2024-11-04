@@ -1,5 +1,5 @@
 const productRouter = require('express')();
-const productController = require('../controllers/productController')
+const productController = require('../../controllers/productController')
 
 productRouter.get('/products', productController.getAllProduct, (req, res) => {})
 

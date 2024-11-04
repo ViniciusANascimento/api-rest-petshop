@@ -1,0 +1,570 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de base",
+    "description": "Essa documentação serve como base para api de base.",
+    "termsOfService": "http://localhost:3000/terms",
+    "contact": {
+      "email": "mail@mail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/v1",
+      "description": "API basica com arquivo de dados."
+    }
+  ],
+  "paths": {
+    "/products": {
+      "post": {
+        "summary": "Cadastro de Produto",
+        "description": "Essa rota será responsavel por cadastrar um novo produto",
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Products"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "id": "1",
+                    "name": "Mouse Optico",
+                    "price": 200
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "400": {
+            "description": "Produto ja cadastrado"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Busca por todos os produtos cadastrados",
+        "summary": "Busca por todos os produtos cadastrados",
+        "tags": ["Products"],
+        "responses": {
+          "500": {
+            "description": "Problemas internos"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "description": "Busca o produto pelo id.",
+        "summary": "Busca um produto pelo id.",
+        "tags":["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do produto a buscar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Alterar o produto pelo id.",
+        "summary": "Alterar o produto pelo id.",
+        "tags":["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do produto a alterar",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Products"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "id": "1",
+                    "name": "Mouse Optico",
+                    "price": 200
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Apaga o produto pelo id.",
+        "summary": "Apaga um produto pelo id.",
+        "tags":["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do produto a ser apagado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/clients": {
+      "post": {
+        "summary": "Cadastro de Clientes",
+        "description": "Essa rota será responsavel por cadastrar um novo cliente",
+        "tags": ["Clients"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Clients"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "id": "1",
+                    "name": "Mickey Mouse",
+                    "age": 20,
+                    "gener": "Male"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "400": {
+            "description": "Produto ja cadastrado"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Busca por todos os clientes cadastrados",
+        "summary": "Busca por todos os clientes cadastrados",
+        "tags": ["Clients"],
+        "responses": {
+          "500": {
+            "description": "Problemas internos"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Clients"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients/{id}": {
+      "get": {
+        "description": "Busca o Cliente pelo id.",
+        "summary": "Busca um Cliente pelo id.",
+        "tags":["Clients"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do cliente a buscar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Clients"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Alterar o cliente pelo id.",
+        "summary": "Alterar o cliente pelo id.",
+        "tags":["Clients"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do cliente a alterar",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Clients"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "id": "1",
+                    "name": "Mickey Mouse",
+                    "age": 21,
+                    "gener": "Male"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Clients"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Apaga o cliente pelo id.",
+        "summary": "Apaga um cliente pelo id.",
+        "tags":["Clients"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do cliente a ser apagado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Clients"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/employeers": {
+      "post": {
+        "summary": "Cadastro de funcionarios",
+        "description": "Essa rota será responsavel por cadastrar um novo funcionario",
+        "tags": ["Employeers"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employeers"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "id": "1",
+                    "name": "Aladin Mohamed",
+                    "position": "Driver"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "400": {
+            "description": "Produto ja cadastrado"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Employeers"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Busca por todos os funcionarios cadastrados",
+        "summary": "Busca por todos os funcionarios cadastrados",
+        "tags": ["Employeers"],
+        "responses": {
+          "500": {
+            "description": "Problemas internos"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Employeers"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employeers/{id}": {
+      "get": {
+        "description": "Busca o funcionario pelo id.",
+        "summary": "Busca um funcionario pelo id.",
+        "tags":["Employeers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionario a buscar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Employeers"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Alterar o funcionario pelo id.",
+        "summary": "Alterar o funcionario pelo id.",
+        "tags":["Employeers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionario a alterar",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employeers"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "id": "1",
+                    "name": "Aladin Mohamed",
+                    "position": "Driver"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Employeers"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Apaga o funcionario pelo id.",
+        "summary": "Apaga um funcionario pelo id.",
+        "tags":["Employeers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionario a ser apagado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Employeers"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "Products": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      },
+      "Clients": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "gener": {
+            "type": "number"
+          }
+        }
+      },
+      "Employeers": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

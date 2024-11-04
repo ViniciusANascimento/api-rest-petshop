@@ -6,7 +6,7 @@ async function getAllProduct(req, res) {
         const products = await productService.getAllProducts();
         res.status(statusCode.OK).json(products);
     }catch (err){
-        res.status(statusCode.BAD_REQUEST).send(err.message);
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(err.message);
     }
 }
 
