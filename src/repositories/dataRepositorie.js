@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
-const mainRepositorie = './src/repositories/mainData.json';
-const saveRepositorie = './src/repositories/changeData.json';
+const mainRepositorie = './src/data/mainData.json';
+const saveRepositorie = './src/data/changeData.json';
 
 function readFileData(){
     return fs.readFile(mainRepositorie,'utf-8')

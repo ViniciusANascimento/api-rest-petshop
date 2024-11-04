@@ -1,9 +1,8 @@
-const clientData = require('../repositories/clientRepositorie')
+const clientData = require('../repositories/dataRepositorie')
 const filter = 'clients'
 
 async function getAllClients(req, res) {
     try{
-        //clientData.readFileData().then(data => console.log(data))
         return  await clientData.filterFile(filter)
     }catch(err){
         return await err;
