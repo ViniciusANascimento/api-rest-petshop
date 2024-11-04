@@ -1,22 +1,13 @@
 const router = require('express')();
 const bodyParser = require('body-parser');
-
-const clientsService  = require('../services/clientService');
+const clientRouter = require('../routes/clients-route')
 
 router.use(bodyParser.json());
 
+//router.get({clientRouter})
 router.get('/', (req, res) => {
     res.sendFile(process.mainModule.path + '/pages/homepage/index.html')
 })
 
-router.get('/clients', clientsService.allInfoClients,(req, res) => {
-    console.log('Exibindo todos os clientes.')
-})
-
-router.get('/clients/:id',clientsService.findClientsById, (req, res) => {
-    console.log(`Parametro de id passado é ${req.params.id}`);
-})
-
-
-
+router.use(clientRouter)
 module.exports = router;

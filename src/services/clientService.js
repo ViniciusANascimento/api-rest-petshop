@@ -1,32 +1,58 @@
-const fs = require('fs')
-const pathFile = './src/repositories/clients.json'
+const clientData = require('../repositories/clientRepositorie')
+const filter = 'clients'
 
-function allInfoClients(req, res, next) {
-    fs.readFile(pathFile, 'utf-8',(err, data) => {
-        if (err) {
-            console.error(err)
-            return res.status(500).send('Erro ao tentar ler o arquivo de Clientes')
-        }
-        res.json(JSON.parse(data));
-    })
-    next()
+async function getAllClients(req, res) {
+    try{
+        //clientData.readFileData().then(data => console.log(data))
+        return  await clientData.filterFile(filter)
+    }catch(err){
+        return await err;
+    }
+
+};
+
+async function getClient(id) {
+    const client = await clientData.filterFile(filter);
+    const clientFounded = client.find((client) => client.id == id);
+    if(!clientFounded){
+        throw new Error('ID não encontrado');
+    }
+    return clientFounded
+};
+
+async function addClient(newClient){
+    const client = await clientData.filterFile(filter)
+    const lastClient = client.length -1;
+    newClient.id = client[lastClient].id +1
+    client.push(newClient);
+    return await clientData.writeFileData(filter, client);
+};
+
+async function deleteClientById(id){
+    const client = await clientData.filterFile(filter);
+    const clientFounded = client.findIndex(client => client.id == id);
+    if(!clientFounded){
+        throw new Error('ID não encontrado');
+    }
+    client.splice(clientFounded, 1);
+    return await clientData.writeFileData(filter, client);
 }
 
-function findClientsById(req, res, next) {
-    const clientId = parseInt(req.params.id);
-    fs.readFile(pathFile, 'utf-8',(err, data) => {
-        if (err) {
-            console.error(err)
-            return res.status('500').send(err);
-        }
-        const client = JSON.parse(data);
-        const clientFound = client.clients.find((client) => client.id === clientId);
-        if (clientFound) {
-            res.json(clientFound);
-        }
-    })
+async function updateClientById(id, updateClient) {
+    const client = await clientData.filterFile(filter);
+    const clientIndex = client.findIndex(client => client.id == id);
 
-    next()
+    if (clientIndex == -1) throw new Error('ID não encontrado');
+    if(updateClient.id != id) throw new Error('ID informado no corpo é diferente do ID do parametro!')
+
+    let clientFounded = client.find((client) => client.id == updateClient.id);
+
+    if(clientFounded.id != updateClient.id) throw new Error('ID não pode ser alterado!')
+
+    client[clientIndex] = updateClient;
+
+    return await clientData.writeFileData(filter, client);
 }
 
-module.exports = {allInfoClients, findClientsById};
+module.exports = {addClient, getAllClients, getClient, deleteClientById, updateClientById };
+

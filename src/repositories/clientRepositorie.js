@@ -1,22 +1,26 @@
 const fs = require('fs').promises;
-const dataRepositories = './src/repositories/data.json';
+const mainRepositorie = './src/repositories/mainData.json';
+const saveRepositorie = './src/repositories/changeData.json';
 
 function readFileData(){
-    return fs.readFile(dataRepositories,'utf-8')
-        .then(data => {
-            const clientJson = JSON.parse(data);
-            return clientJson.clients;
-
-        })
+    return fs.readFile(mainRepositorie,'utf-8')
+        .then(data => data = JSON.parse(data))
         .catch((err) => {
-            return `Problema ao carregar os dados de clientes`;
+            return `Problema ao carregar o arquivo de dados`;
         })
 }
 
-function writeFileData(newClient){
-    console.log(newClient)
-    //return fs.writeFile(dataRepositories, JSON.stringify(newClient,null,2));
+function filterFile(typeFilter){
+    return readFileData()
+        .then(data => data[typeFilter]);
+}
+
+async function writeFileData( filter, newData){
+    const data = await readFileData();
+    data[filter] = newData
+    fs.writeFile(saveRepositorie, JSON.stringify(data),'utf-8');
+    return newData;
 }
 
 
-module.exports = { readFileData, writeFileData}
+module.exports = { writeFileData, filterFile}

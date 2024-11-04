@@ -1,5 +1,5 @@
 {
-  "Clients": [
+  "clients": [
     { "id": 1, "name": "Alice", "age": "24", "gender": "Woman" },
     { "id": 2, "name": "Bob", "age": "30", "gender": "Man" },
     { "id": 3, "name": "Carol", "age": "29", "gender": "Woman" },
@@ -22,7 +22,7 @@
     { "id": 20, "name": "Tom", "age": "31", "gender": "Man" }
   ],
 
-  "Products": [
+  "products": [
     { "id": 1, "name": "Laptop", "price": 1200 },
     { "id": 2, "name": "Smartphone", "price": 800 },
     { "id": 3, "name": "Tablet", "price": 500 },
@@ -45,7 +45,7 @@
     { "id": 20, "name": "Game Console", "price": 400 }
   ],
 
-  "Employeers": [
+  "employeers": [
     { "id": 1, "name": "Anna", "position": "Software Engineer" },
     { "id": 2, "name": "Brian", "position": "Product Manager" },
     { "id": 3, "name": "Catherine", "position": "UX Designer" },
