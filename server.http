@@ -1,0 +1,26 @@
+###Metodo get para recuperar todos os clientes
+GET localhost:3000/clients
+### Metodo get para recuperar cliente por id
+GET localhost:3000/clients/{id}
+### Metodo post para cadastrar novo cliente
+POST localhost:3000/clients
+Content-Type: application/json
+
+{
+  "id": 22,
+  "name": "asxa",
+  "age": 42,
+  "gender": "Man"
+}
+### Metodo PUT para atualizar cadastro do cliente
+PUT localhost:3000/clients/{id}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Axxlice",
+  "age": "224",
+  "gender": "Man"
+}
+### Metodo DELETE para apagar o cliente do arquivo
+DELETE localhost:3000/{id}
